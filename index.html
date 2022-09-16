@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 25px;
+            color: cyan;
+            background-color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family:"Trirong",serif;
+        }
+        .MyWatch{
+            margin-top: 100px;
+            background-color:black;
+            padding: 25px 25px;
+            border-radius: 10px;
+            box-shadow: -20px 20px 20px rgba(0,0,0,0.5),
+                        inset -2px 2px 3px red;
+                        
+                        
+                       
+        }
+        .row1{
+            color: grey;
+            font-size: 40px;
+            
+           
+            
+        }
+        .H{
+            color: red;
+            box-shadow: -4px -4px 15px rgba(255,255,255,.2),
+                        5px 5px 15px rgba(0,0,0,.1),
+                       inset -4px -4px 15px rgba(255,255,255,.2),
+                       inset 2px 2px 15px rgba(0,0,0,.1);
+            border-radius: 5px;
+            padding: 0 5px;
+        }
+        .M{
+            color: greenyellow;
+            border-radius: 5px;
+            padding: 0px 5px;
+            box-shadow: -4px -4px 15px rgba(255,255,255,.2),
+                        5px 5px 15px rgba(0,0,0,.1),
+                       inset -4px -4px 15px rgba(255,255,255,.2),
+                       inset 2px 2px 15px rgba(0,0,0,.1);
+            
+        }
+        .row2{
+            background-color: transparent/*rgb(24, 23, 23)*/;
+            border-radius: 8px;
+            /* box-shadow: -2px 2px 5px rgb(255, 255, 48); */
+            box-shadow: -4px -4px 15px rgba(255,255,255,.2),
+                        5px 5px 15px rgba(0,0,0,.1),
+                       inset -4px -4px 15px rgba(255,255,255,.2),
+                       inset 4px 4px 15px rgba(0,0,0,.1);
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+        .sign{
+            color: rgb(35, 39, 44);
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <div class="MyWatch">
+        <div class="row1">
+            <span class="H"></span>
+            <span class="M"></span>
+        </div>
+        <div class="row2">
+            <span class="date"></span>
+        </div>
+    </div>
+    <div class="sign">~Sayeed.</div>
+
+    <script>
+        function myTime(){
+            var myDate = new Date();
+            var hr,min = (myDate.getMinutes() < 10) ? "0" + myDate.getMinutes() : myDate.getMinutes(),
+                sec = (myDate.getSeconds() < 10) ? "0" + myDate.getSeconds() : myDate.getSeconds(),
+                M = (myDate.getHours() >= 12 ) ? "AM" : "PM";
+
+            if(myDate.getHours() == 0){
+                hr =12;
+            }
+            else if(myDate.getHours() > 12){
+                hr = myDate.getHours() - 12;
+            }
+            else{
+                hr = myDate.getHours();
+            }
+
+            var currentTime = hr + " : " + min + " : " + sec ;
+
+            document.getElementsByClassName("H")[0].innerHTML = currentTime;
+            document.getElementsByClassName("M")[0].innerHTML = M;
+
+            var myDay = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            var myMonth = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            var day = myDate.getDate();
+             
+            var currentDate = myDay[myDate.getDay()] + " , " + myMonth[myDate.getMonth()] + " " + day ;
+            
+            document.getElementsByClassName("date")[0].innerHTML = currentDate;
+
+        }
+
+        myTime(); //ato obdi korle shudhu refresh korar por time change hobe nato hobena, tar jonno oirer ta korte hobe.
+
+        setInterval(function(){
+            myTime();
+        }, 1000); //jate proti ak sec por por time chage hoy tai 1000 ta lekha.
+
+    </script>
+</body>
+</html>
